@@ -2,13 +2,12 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+
 
 
 module.exports = {
     context:path.resolve(__dirname, './src'),
-    entry: './index.tsx',
+    entry: './index.js',
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
@@ -33,6 +32,14 @@ module.exports = {
     ],
     module: {
         rules: [
+
+        {
+            test: /\.(mp3|wav)$/,  // Match audio files
+            type: 'asset/resource', // Use Webpack 5's built-in asset handling
+            generator: {
+                filename: 'sounds/[name][ext]' // Save files to sounds folder in output
+            }
+        },
         {
             test: /\.[tj]sx?$/,
             use: 'ts-loader',
