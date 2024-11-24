@@ -1,29 +1,46 @@
-
-import './index.scss'; 
+import './index.scss';
 
 import summerAudio from './assets/sounds/summer.mp3';
 import autumnAudio from './assets/sounds/rain.mp3';
 import winterAudio from './assets/sounds/winter.mp3';
 
-const audioFiles = {
-  summer: new Audio(summerAudio),
-  autumn: new Audio(autumnAudio),
-  winter: new Audio(winterAudio)
+interface CustomAudioElement extends HTMLAudioElement {
+  season?: keyof AudioFiles;
+}
+
+interface AudioFiles {
+  [key: string]: CustomAudioElement;
+  summer: CustomAudioElement;
+  autumn: CustomAudioElement;
+  winter: CustomAudioElement;
+}
+
+type AudioTimes = {
+  [key: string]: number;
 };
 
-const audioTimes = {
+const audioFiles: AudioFiles = {
+  summer: new Audio(summerAudio as string) as CustomAudioElement,
+  autumn: new Audio(autumnAudio as string) as CustomAudioElement,
+  winter: new Audio(winterAudio as string) as CustomAudioElement
+};
+
+const audioTimes: AudioTimes = {
   summer: 0,
   autumn: 0,
   winter: 0
 };
 
-let currentPlayingAudio = null;
 
-document.querySelectorAll('.play-pause').forEach(button => {
+
+let currentPlayingAudio: null | CustomAudioElement = null;
+
+
+document.querySelectorAll('.play-pause').forEach(( button :HTMLButtonElement) => {
   button.addEventListener('click', () => {
     const season = button.getAttribute('data-season');
     const selectedAudio = audioFiles[season];
-    const progressBar = button.nextElementSibling;
+    const progressBar  = button.nextElementSibling as HTMLProgressElement;
 
     if (!selectedAudio) {
       console.error(`No audio file found for season: ${season}`);
@@ -42,7 +59,8 @@ document.querySelectorAll('.play-pause').forEach(button => {
     if (currentPlayingAudio && currentPlayingAudio !== selectedAudio) {
       currentPlayingAudio.pause();
       audioTimes[currentPlayingAudio.season] = currentPlayingAudio.currentTime;
-      document.querySelector(`.play-pause[data-season="${currentPlayingAudio.season}"]`).innerText = 'Play';
+      let plyBtn: HTMLButtonElement = document.querySelector(`.play-pause[data-season="${currentPlayingAudio.season}"]`)
+      plyBtn.innerText = 'Play';
     }
 
     selectedAudio.currentTime = audioTimes[season] || 0;
