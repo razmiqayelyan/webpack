@@ -1,11 +1,110 @@
- @font-face {
-    font-family: 'Roboto';
-    src: url('./fonts/Roboto-Regular.ttf') format('truetype');
+@font-face {
+   font-family: 'Roboto';
+   src: url('./fonts/Roboto-Regular.ttf') format('truetype');
  }
  
-
-
  body {
-    font-family: 'Roboto', sans-serif;
-    border: 2px solid black;
+   font-family: 'Roboto', sans-serif;
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   background-image: url('https://images.pexels.com/photos/531767/pexels-photo-531767.jpeg?cs=srgb&dl=pexels-pixabay-531767.jpg&fm=jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   margin: 0;
+   overflow: hidden;
+ }
+ 
+ .container {
+   height: 100%;
+   width: 80%;
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-around;
+ }
+ 
+ .box {
+   position: relative;
+   min-width: 350px;
+   min-height: 300px;
+   margin: 10px;
+   border-radius: 15%;
+   cursor: pointer;
+   transition: transform 0.2s ease-in;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   align-items: center;
+   overflow: hidden;
+ }
+ 
+ .box:hover {
+   transform: scale(1.018);
+ }
+ 
+ .summer {
+   background-image: url('./assets/summer-bg.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+ }
+ 
+ .winter {
+   background-image: url('./assets/winter-bg.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+ }
+ 
+ .autumn {
+   background-image: url('./assets/rainy-bg.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+ }
+ 
+ h1 {
+   font-size: 50px;
+   color: white;
+ }
+ 
+ .controls {
+   width: 100%;
+   padding: 10px;
+   background: rgba(0, 0, 0, 0.5);
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+ 
+ .play-pause {
+   margin-top: 5px;
+   color: white;
+   background: transparent;
+   border: 1px solid white;
+   padding: 5px 15px;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+ 
+ .progress-bar {
+   width: 80%;
+   height: 5px;
+   margin-top: 10px;
+   appearance: none;
+ }
+ 
+ .progress-bar::-webkit-progress-bar {
+   background-color: #e0e0e0;
+   border-radius: 3px;
+ }
+ 
+ .progress-bar::-webkit-progress-value {
+   background-color: #76c7c0;
+   border-radius: 3px;
+ }
+ 
+ .progress-bar::-moz-progress-bar {
+   background-color: #76c7c0;
+   border-radius: 3px;
  }
